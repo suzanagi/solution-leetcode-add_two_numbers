@@ -6,11 +6,9 @@ class Solution:
     def add(self, e1: int, e2: int, c: int) -> Tuple[int, int]:
         result = (e1 + e2 + c) % 10
         carry = int((e1 + e2 + c) / 10)
-        # print("add ", e1, " + ", e2, ". result: ", result, ", carry: ", carry)
         return result, carry
     
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        # print("l1: ", l1, "\nl2: ", l2)
         # variable to store the carry from the lower place
         carry = 0
         # prepare the head node of the result
@@ -22,6 +20,7 @@ class Solution:
         p, q = l1.next, l2.next
         # while p and q don't reach the end of the list
         while p != None and q != None:
+            # print("in the first while")
             result, carry = self.add(p.val, q.val, carry)
             next = ListNode(result)
             cur.next = next
@@ -34,7 +33,7 @@ class Solution:
             # if no more q but p is remaining
             if p != None:
                 # add p.val and the carry from the lower place
-                res, car = add(p.val, 0, carry)
+                res, carry = self.add(p.val, 0, carry)
                 # append the upper place result and update the cur pointer
                 cur.next = ListNode(res)
                 cur = cur.next
@@ -43,7 +42,7 @@ class Solution:
             # if no more p but q is remaining    
             elif q != None:
                 # add q.val and the carry from the lower place
-                res, car = self.add(q.val, 0, carry)
+                res, carry = self.add(q.val, 0, carry)
                 # append the upper place result and update the cur pointer
                 cur.next = ListNode(res)
                 cur = cur.next
